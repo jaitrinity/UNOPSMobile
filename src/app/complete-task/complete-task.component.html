@@ -1,0 +1,100 @@
+<div class="row complete-div" *ngIf="isTaskDiv">
+  <div class="col-xs-12 text-center text-white">
+    <label class="text-bold">Completed</label>
+  </div>
+</div>
+
+<div *ngIf="isTaskDiv">
+  <div class="row">
+    <div class="col-12" style="margin-top: 10px;">
+      <select class="form-control select-sm" [(ngModel)]="checklist" (change)="selectChecklist()">
+        <option value="">Select</option>
+        <option value="322">Basic</option>
+        <option value="323">Visiting Place & Pics</option>
+        <option value="324">Travel Detail</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="completedTask.length == 0">
+  <div class="row">
+    <div class="col-8 text-warning">
+      <label class="text-bold"><i>! No Record Found</i></label>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isTaskDiv && completedTask.length != 0" style="max-height: 550px;overflow: auto;">
+  <div class="row task-div" *ngFor="let st of completedTask">
+    <div class="col-9">
+      <div class="row">
+        <div class="col-12">
+          <label class="text-bold">{{st.caption}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">{{st.submitDateTime}}</div>
+      </div>
+      <div class="row">
+        <div class="col-12">{{st.locationName}}</div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-12">
+          <button class="btn btn-sm text-white text-bold" [ngStyle]="{'background-color':button}" (click)="viewDetails(st)">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isTaskDiv">
+  <div class="row" style="height: 600px;overflow: auto;">
+    <div class="col-12">
+      <table class="table table-bordered myTable" style="box-shadow: 0px 0px 3px 0px gray">
+        <thead>
+          <tr>
+            <th style="width: 65px;">SR No</th> <th>Checkpoint</th> <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let td of transactionDetList" [ngClass]="{'text-white' : td.typeId == 17}" [ngStyle]="{'background-color': td.typeId == 17 ? color1 : ''}">
+            <td *ngIf="td.value != '' ">{{td.srNumber}}</td>
+            <td *ngIf="td.value != '' ">{{td.checkpoint}}</td>
+            <td *ngIf="td.value != '' && td.typeId != 5 && td.typeId != 6 && td.typeId != 12">{{td.value}}</td>
+            <td *ngIf="td.value != '' && td.typeId == 5 || td.typeId == 6">
+              <div class="row" >
+                <div class="col-md-3">
+                  <img [src] = "v" *ngFor="let v of td.value?.split(',')" class="small-image img-thumbnail">
+                </div>
+                <div class="col-md-6">
+                  <div *ngFor="let latlong of td.imgLatLong?.split(':');let i = index">
+                    Latlong : {{latlong}}
+                  </div>
+                  <div *ngFor="let datetime of td.imgDatetime?.split(',');let j = index">
+                    Datetime : {{datetime}}
+                  </div>
+                </div>
+              </div>
+              
+            </td>
+            <td *ngIf="td.value != '' && td.typeId == 12 ">
+              <span *ngFor="let v of td.value?.split(',')">
+                <i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp;
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+      <button class="btn btn-sm text-white text-bold" [ngStyle]="{'background-color':button}" (click)="isTaskDiv = !isTaskDiv">Back</button>
+    </div>
+  </div>
+</div>
+

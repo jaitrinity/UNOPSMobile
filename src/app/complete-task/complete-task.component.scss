@@ -1,0 +1,55 @@
+$color1 :#28c1f4;
+$button : #5490cc;
+.row{
+    margin: 0px;
+}
+.complete-div{
+    background-color: $button;
+    padding: 10px;
+    border-radius: 0px 0px 20px 20px;
+}
+.task-div{
+    background-color: $color1;
+    margin: 10px 5px;
+    color: white;
+    padding: 5px;
+}
+.myTable thead > tr > th{
+    color:white;
+}
+.myTable{
+    font-size:12px;
+    background-color: $color1;
+    border: 1px solid #dbdbdb;
+}
+.myTable th {
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+    z-index: 10; 
+    background-color:$color1;
+  }
+.myTable tbody > tr:nth-of-type(odd) {
+    background-color: #c2dceb;
+}
+.myTable tbody > tr:nth-of-type(even) {
+  background-color: #f9f9f9;
+}
+.myTable tr th,.myTable tr td{
+    padding: 4px;
+}
+.small-image{
+    width: 50px;height: 50px;
+    cursor: pointer;
+}
+.text-bold{
+    font-weight: bold;
+}
+.input-sm{
+    height: 25px!important;
+    box-shadow: 0 0 6px #b3b3b3;
+    margin-bottom: 5px!important;
+}
+.select-sm{
+    padding: 2 10px!important;
+}
